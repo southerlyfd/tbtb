@@ -28,7 +28,7 @@ public class OaController {
         log.info("查询开始");
 
         Person person = personService.getPersonById(id);
-
+        System.out.println();
         if (person == null) {
             return new CommonResult<Person>(404, "查无此人", null);
         }
