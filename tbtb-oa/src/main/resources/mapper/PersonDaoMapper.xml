@@ -8,9 +8,29 @@
     </insert>
 
     <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.entities.Person">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <id column="employeeid" property="employeeid" jdbcType="BIGINT"/>
-        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <id column="EmployeeID" property="employeeID" jdbcType="BIGINT"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="Date" property="date" jdbcType="VARCHAR"/>
+        <result column="City" property="city" jdbcType="VARCHAR"/>
+        <result column="Nation" property="nation" jdbcType="VARCHAR"/>
+        <result column="Polity" property="polity" jdbcType="VARCHAR"/>
+        <result column="Culture" property="culture" jdbcType="VARCHAR"/>
+        <result column="Marriage" property="marriage" jdbcType="VARCHAR"/>
+        <result column="Graduate" property="graduate" jdbcType="VARCHAR"/>
+        <result column="Spec" property="spec" jdbcType="VARCHAR"/>
+        <result column="Speci" property="speci" jdbcType="VARCHAR"/>
+        <result column="Wtype" property="wtype" jdbcType="VARCHAR"/>
+        <result column="Duty" property="duty" jdbcType="VARCHAR"/>
+        <result column="Depart" property="depart" jdbcType="VARCHAR"/>
+        <result column="IDcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="Address" property="address" jdbcType="VARCHAR"/>
+        <result column="Postcode" property="postcode" jdbcType="VARCHAR"/>
+        <result column="HomePhone" property="homePhone" jdbcType="VARCHAR"/>
+        <result column="Mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="Email" property="email" jdbcType="VARCHAR"/>
+        <result column="Resume" property="resume" jdbcType="VARCHAR"/>
+        <result column="Photo" property="photo" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getPersonById" parameterType="Long" resultMap="BaseResultMap">
