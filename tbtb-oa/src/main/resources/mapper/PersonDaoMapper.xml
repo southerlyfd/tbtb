@@ -3,8 +3,144 @@
 
 <mapper namespace="com.tbtaobao.cloud.dao.PersonDao">
 
-    <insert id="create" parameterType="Person" useGeneratedKeys="true" keyProperty="id">
-        insert  into person(name) values (#{name})
+    <insert id="create" parameterType="Person" useGeneratedKeys="true" keyProperty="employeeID">
+        insert  into person
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="name != null">
+                    Name,
+                </if>
+                <if test="sex != null">
+                    Sex,
+                </if>
+                <if test="date != null">
+                    Date,
+                </if>
+                <if test="city != null">
+                    City,
+                </if>
+                <if test="nation != null">
+                    Nation,
+                </if>
+                <if test="polity != null">
+                    Polity,
+                </if>
+                <if test="culture != null">
+                    Culture,
+                </if>
+                <if test="marriage != null">
+                    Marriage,
+                </if>
+                <if test="graduate != null">
+                    Graduate,
+                </if>
+                <if test="spec != null">
+                    Spec,
+                </if>
+                <if test="speci != null">
+                    Speci,
+                </if>
+                <if test="wtype != null">
+                    Wtype,
+                </if>
+                <if test="duty != null">
+                    Duty,
+                </if>
+                <if test="depart != null">
+                    Depart,
+                </if>
+                <if test="idcard != null">
+                    IDcard,
+                </if>
+                <if test="address != null">
+                    Address,
+                </if>
+                <if test="postcode != null">
+                    Postcode,
+                </if>
+                <if test="homePhone != null">
+                    HomePhone,
+                </if>
+                <if test="mobile != null">
+                    Mobile,
+                </if>
+                <if test="email != null">
+                    Email,
+                </if>
+                <if test="resume != null">
+                    Resume,
+                </if>
+                <if test="photo != null">
+                    Photo,
+                </if>
+            </trim>
+            <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+                <if test="name != null">
+                    #{name},
+                </if>
+                <if test="sex != null">
+                    #{sex},
+                </if>
+                <if test="date != null">
+                    #{date},
+                </if>
+                <if test="city != null">
+                    #{city},
+                </if>
+                <if test="nation != null">
+                    #{nation},
+                </if>
+                <if test="polity != null">
+                    #{polity},
+                </if>
+                <if test="culture != null">
+                    #{culture},
+                </if>
+                <if test="marriage != null">
+                    #{marriage},
+                </if>
+                <if test="graduate != null">
+                    #{graduate},
+                </if>
+                <if test="spec != null">
+                    #{spec},
+                </if>
+                <if test="speci != null">
+                    #{speci},
+                </if>
+                <if test="wtype != null">
+                    #{wtype},
+                </if>
+                <if test="duty != null">
+                    #{duty},
+                </if>
+                <if test="depart != null">
+                    #{depart},
+                </if>
+                <if test="idcard != null">
+                    #{idcard},
+                </if>
+                <if test="address != null">
+                    #{address},
+                </if>
+                <if test="postcode != null">
+                    #{postcode},
+                </if>
+                <if test="homePhone != null">
+                    #{homePhone},
+                </if>
+                <if test="mobile != null">
+                    #{mobile},
+                </if>
+                <if test="email != null">
+                    #{email},
+                </if>
+                <if test="resume != null">
+                    #{resume},
+                </if>
+                <if test="photo != null">
+                    #{photo},
+                </if>
+            </trim>
     </insert>
 
     <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.entities.Person">

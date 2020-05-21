@@ -15,4 +15,6 @@ public interface UserInfoDao {
     UserInfo findUserInfo(@Param("accountNum") String accountNum, @Param("password") String password);
 
     int updateUserInfo(@Param("userInfo")UserInfo userInfo);
+
+    UserInfo findUserInfoToken(@Param("token")String token);
 }

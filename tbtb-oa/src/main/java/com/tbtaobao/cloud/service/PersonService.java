@@ -12,4 +12,5 @@ public interface PersonService {
     public int create(Person person);
 
     public Person getPersonById(@Param("id") Long id);
+
 }

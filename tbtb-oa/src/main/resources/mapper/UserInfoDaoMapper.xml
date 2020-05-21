@@ -23,6 +23,15 @@
             ui.`password` = #{password}
     </select>
 
+    <select id="findUserInfoToken" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+            ui.*
+        FROM
+            user_info ui
+        WHERE
+            ui.access_token = #{accessToken}
+    </select>
+
     <update id="updateUserInfo">
         update user_info
         <trim prefix="set" suffixOverrides=",">
