@@ -11,6 +11,7 @@
     <modules>
         <module>tbtb-oa</module>
         <module>tbtb-eureka-server</module>
+        <module>tbtb-zuul-server</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->

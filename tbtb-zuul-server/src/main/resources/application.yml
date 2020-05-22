@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: tbtb-zuul-server
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: zuul   #自定义服务名称信息  启动多个服务做集群需要设置为不同的ID值
+    prefer-ip-address: true   #访问路径可以显示IP地址
+
+zuul:
+  routes:
+    feign: #自定义名称
+      path: /tbtb/** # 自定义的路由
+      serviceId: tbtb-oa # 指向的服务名称
