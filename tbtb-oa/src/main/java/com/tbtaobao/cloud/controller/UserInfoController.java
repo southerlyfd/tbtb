@@ -86,4 +86,31 @@ public class UserInfoController {
         result.setMessage("添加成功");
         return result;
     }
+
+    /**
+     * 查询职员信息
+     *
+     * @param person
+     * @return
+     */
+    @RequestMapping("/findPersonOne")
+    public CommonResult<Person> findPersonInfo(Person person){
+        CommonResult<Person> result = new CommonResult<Person>();
+
+        if (person.getEmployeeID() == null || person.getEmployeeID() < 0) {
+            result.setCode(404);
+            result.setMessage("employeeID参数错误");
+            return  result;
+        }
+        Person data = personService.getPersonById(person.getEmployeeID());
+        if (data == null) {
+            result.setCode(404);
+            result.setMessage("没有该成员信息");
+            return  result;
+        }
+        result.setCode(200);
+        result.setMessage("查询成功");
+        result.setData(data);
+        return result;
+    }
 }

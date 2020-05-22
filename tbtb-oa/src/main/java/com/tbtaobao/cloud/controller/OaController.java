@@ -22,7 +22,7 @@ public class OaController {
     private PersonService personService;
 
     @PostMapping(value = "/oa/get")
-    public CommonResult<Person> test(Long id){
+    public CommonResult<Person> test(Integer id){
 //        Comparable result = new Comparable();
 
         log.info("查询开始");

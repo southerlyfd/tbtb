@@ -13,5 +13,5 @@ public interface PersonDao {
 
     public int create(Person person);
 
-    public Person getPersonById(@Param("id") Long id);
+    public Person getPersonById(@Param("id") Integer id);
 }
