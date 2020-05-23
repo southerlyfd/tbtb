@@ -15,6 +15,21 @@ eureka:
 
 zuul:
   routes:
-    feign: #自定义名称
-      path: /tbtb/** # 自定义的路由
-      serviceId: tbtb-oa # 指向的服务名称
+    API-A:
+      path: /oa/**
+      serviceId: tbtb-oa #指向的服务名称
+    API-B:
+      path: /test/**
+      serviceId: tbtb-test #指向的服务名称
+  ##防跨域请求
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Vary,X-Frame-Options,token
+
+##目的：防止服务重启后，第一次访问超时
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+          strategy: SEMAPHORE #Request请求头设置token
