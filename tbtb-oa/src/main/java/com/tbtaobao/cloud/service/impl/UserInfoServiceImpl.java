@@ -46,4 +46,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         result.setMessage("success");
         return result;
     }
+
+    @Override
+    public UserInfo findUserInfoByAccessToken(String accessToken) {
+        return userInfoDao.findUserInfoToken(accessToken);
+    }
 }

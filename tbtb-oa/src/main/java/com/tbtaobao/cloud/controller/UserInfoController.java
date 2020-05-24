@@ -6,7 +6,9 @@ import com.tbtaobao.cloud.entities.UserInfo;
 import com.tbtaobao.cloud.service.PersonService;
 import com.tbtaobao.cloud.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -103,6 +105,34 @@ public class UserInfoController {
             return  result;
         }
         Person data = personService.getPersonById(person.getEmployeeID());
+        if (data == null) {
+            result.setCode(404);
+            result.setMessage("没有该成员信息");
+            return  result;
+        }
+        result.setCode(200);
+        result.setMessage("查询成功");
+        result.setData(data);
+        return result;
+    }
+
+    /**
+     * 根据token查询职员信息
+     *
+     * @param accessToken
+     * @return
+     */
+    @RequestMapping("/findPersonInfoByToken")
+    public CommonResult<Person> findPersonInfoByToken(@RequestHeader String accessToken){
+        CommonResult<Person> result = new CommonResult<Person>();
+
+        UserInfo userInfo = userInfoService.findUserInfoByAccessToken(accessToken);
+        if (userInfo == null) {
+            result.setCode(404);
+            result.setMessage("token 已失效！");
+            return  result;
+        }
+        Person data = personService.getPersonById(userInfo.getUserId());
         if (data == null) {
             result.setCode(404);
             result.setMessage("没有该成员信息");

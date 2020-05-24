@@ -13,4 +13,7 @@ public interface UserInfoService {
 
     // 查询用户信息
     CommonResult<Map> findUserInfo(UserInfo userInfo);
+
+    // 根据token查询用户信息
+    UserInfo findUserInfoByAccessToken(String accessToken);
 }

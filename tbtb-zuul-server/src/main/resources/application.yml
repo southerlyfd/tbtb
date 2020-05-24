@@ -23,7 +23,8 @@ zuul:
       serviceId: tbtb-test #指向的服务名称
   ##防跨域请求
   sensitive-headers: Access-Control-Allow-Origin
-  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Vary,X-Frame-Options,token
+  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Vary,X-Frame-Options
+
 
 ##目的：防止服务重启后，第一次访问超时
 hystrix:

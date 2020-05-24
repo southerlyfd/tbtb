@@ -1,10 +1,5 @@
 package com.tbtaobao.cloud.fiter;
 
-/**
- * @author ：taoyl
- * @date ：Created in 2020-05-21 21:52
- * @description：
- */
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -13,10 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
-
+/**
+ * @author ：taoyl
+ * @date ：Created in 2020-05-21 21:52
+ * @description：
+ */
 @Component
 public class AccessFilter extends ZuulFilter {
 
@@ -79,16 +77,18 @@ public class AccessFilter extends ZuulFilter {
             return null;
         }
         String token = request.getHeader("token");
-        if (token == null) {
-            logger.warn("Token is empty");
+        if (token == null || token.isEmpty()) {
+            logger.warn("token is empty");
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
             try {
-                context.getResponse().getWriter().write("Token is empty");
+                context.getResponse().getWriter().write("token is empty");
             } catch (IOException e) {
             }
         } else {
             logger.info("OK");
+            //将头信息传递下去
+            context.addZuulRequestHeader("accessToken", token);
         }
         return null;
     }
