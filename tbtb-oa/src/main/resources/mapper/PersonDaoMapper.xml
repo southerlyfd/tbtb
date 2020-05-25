@@ -172,4 +172,13 @@
     <select id="getPersonById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select * from person where EmployeeID= #{id}
     </select>
+
+
+    <select id="findPersonInfoLstCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM person
+    </select>
+
+    <select id="findPersonInfoLst" resultMap="BaseResultMap">
+        SELECT * FROM person LIMIT #{page.startIndex},#{page.onePageCount}
+    </select>
 </mapper>
