@@ -1,20 +1,19 @@
 package com.tbtaobao.cloud.controller;
 
+import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.entities.UserInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfo;
 import com.tbtaobao.cloud.service.PersonService;
 import com.tbtaobao.cloud.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author ：jhb
@@ -141,6 +140,21 @@ public class UserInfoController {
         result.setCode(200);
         result.setMessage("查询成功");
         result.setData(data);
+        return result;
+    }
+    /*
+     * 分页查询职员信息
+     *
+     * @param parameter
+     * @return
+     */
+    @RequestMapping("/findPersonInfoLst")
+    public CommonResult<Page> findPersonInfoLst(FindPersonInfo parameter){
+        CommonResult<Page> result = new CommonResult<Page>();
+        Page data = personService.findPersonInfoLst(parameter);
+        result.setData(data);
+        result.setCode(200);
+        result.setMessage("查询成功");
         return result;
     }
 }

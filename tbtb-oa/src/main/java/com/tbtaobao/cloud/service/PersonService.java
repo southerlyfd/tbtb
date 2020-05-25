@@ -1,6 +1,8 @@
 package com.tbtaobao.cloud.service;
 
+import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.Person;
+import com.tbtaobao.cloud.parameter.FindPersonInfo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -13,4 +15,5 @@ public interface PersonService {
 
     public Person getPersonById(@Param("id") Integer id);
 
+    Page<Person> findPersonInfoLst(FindPersonInfo parameter);
 }
