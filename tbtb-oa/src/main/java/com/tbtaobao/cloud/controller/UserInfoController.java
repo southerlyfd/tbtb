@@ -157,4 +157,52 @@ public class UserInfoController {
         result.setMessage("查询成功");
         return result;
     }
+
+    /**
+     * 删除职员信息
+     * @param employeeId
+     * @return
+     */
+    @RequestMapping("/deletePersonInfo")
+    public CommonResult<Map> deletePersonInfo(Integer employeeID){
+        CommonResult<Map> result = new CommonResult<Map>();
+
+        Integer data = personService.deletePersonInfo(employeeID);
+
+        if (data == null || data == 0) {
+            result.setCode(404);
+            result.setMessage("删除失败");
+            return result;
+        }
+        result.setCode(200);
+        result.setMessage("删除成功");
+        return result;
+    }
+
+    /**
+     * 更新职员信息
+     *
+     * @param person
+     * @return
+     */
+    @RequestMapping("/updatePersonInfo")
+    public CommonResult<Map> updatePersonInfo(Person person){
+        CommonResult<Map> result = new CommonResult<Map>();
+
+        if (person == null || person.getEmployeeID() == null || person.getEmployeeID() <= 0) {
+            result.setCode(404);
+            result.setMessage("参数为空");
+            return result;
+        }
+        Integer data = personService.updatePersonInfo(person);
+
+        if (data == null || data == 0) {
+            result.setCode(404);
+            result.setMessage("更新失败");
+            return result;
+        }
+        result.setCode(200);
+        result.setMessage("更新成功");
+        return result;
+    }
 }

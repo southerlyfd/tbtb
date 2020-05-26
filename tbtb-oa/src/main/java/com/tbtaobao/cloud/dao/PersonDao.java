@@ -21,5 +21,9 @@ public interface PersonDao {
 
     int findPersonInfoLstCount(@Param("parameter")FindPersonInfo parameter);
 
-    List<Person> findPersonInfoLst(@Param("page")Page page);
+    List<Person> findPersonInfoLst(@Param("page")Page page, @Param("parameter")FindPersonInfo parameter);
+
+    int deletePersonInfo(@Param("id") Integer id);
+
+    int updatePersonInfo(Person person);
 }

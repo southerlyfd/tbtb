@@ -19,4 +19,10 @@ public class FindPersonInfo {
 
     // 每页显示记录数
     private Integer onePageCount;
+
+    // 职工ID
+    private     Integer     employeeID;
+
+    // 职工姓名
+    private     String      name;
 }

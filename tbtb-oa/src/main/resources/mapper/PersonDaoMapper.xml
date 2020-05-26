@@ -176,9 +176,102 @@
 
     <select id="findPersonInfoLstCount" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM person
+        where 1=1
+        <if test="parameter.employeeID != null">
+            and EmployeeID = #{parameter.employeeID}
+        </if>
+        <if test="parameter.name != null and parameter.name != '' ">
+            and Name = #{parameter.name}
+        </if>
     </select>
 
     <select id="findPersonInfoLst" resultMap="BaseResultMap">
-        SELECT * FROM person LIMIT #{page.startIndex},#{page.onePageCount}
+        SELECT * FROM person
+        where 1=1
+        <if test="parameter.employeeID != null">
+            and EmployeeID = #{parameter.employeeID}
+        </if>
+        <if test="parameter.name != null and parameter.name != '' ">
+            and Name = #{parameter.name}
+        </if>
+         LIMIT #{page.startIndex},#{page.onePageCount}
     </select>
+
+    <delete id="deletePersonInfo" parameterType="java.lang.Integer">
+        DELETE FROM person WHERE EmployeeID = #{id}
+    </delete>
+
+    <update id="updatePersonInfo" parameterType="Person">
+        UPDATE person
+        <set>
+            <if test="name != null">
+                Name = #{name},
+            </if>
+            <if test="sex != null">
+                Sex = #{sex},
+            </if>
+            <if test="date != null">
+                Date = #{date},
+            </if>
+            <if test="city != null">
+                City = #{city},
+            </if>
+            <if test="nation != null">
+                Nation = #{nation},
+            </if>
+            <if test="polity != null">
+                Polity = #{polity},
+            </if>
+            <if test="culture != null">
+                Culture = #{culture},
+            </if>
+            <if test="marriage != null">
+                Marriage = #{marriage},
+            </if>
+            <if test="graduate != null">
+                Graduate = #{graduate},
+            </if>
+            <if test="spec != null">
+                Spec = #{spec},
+            </if>
+            <if test="speci != null">
+                Speci = #{speci},
+            </if>
+            <if test="wtype != null">
+                Wtype = #{wtype},
+            </if>
+            <if test="duty != null">
+                Duty = #{duty},
+            </if>
+            <if test="depart != null">
+                Depart = #{depart},
+            </if>
+            <if test="idcard != null">
+                IDcard = #{idcard},
+            </if>
+            <if test="address != null">
+                Address = #{address},
+            </if>
+            <if test="postcode != null">
+                Postcode = #{postcode},
+            </if>
+            <if test="homePhone != null">
+                HomePhone = #{homePhone},
+            </if>
+            <if test="mobile != null">
+                Mobile = #{mobile},
+            </if>
+            <if test="email != null">
+                Email = #{email},
+            </if>
+            <if test="resume != null">
+                Resume = #{resume},
+            </if>
+            <if test="photo != null">
+                Photo = #{photo},
+            </if>
+        </set>
+        where
+        EmployeeID = #{employeeID}
+    </update>
 </mapper>

@@ -16,4 +16,8 @@ public interface PersonService {
     public Person getPersonById(@Param("id") Integer id);
 
     Page<Person> findPersonInfoLst(FindPersonInfo parameter);
+
+    int deletePersonInfo(@Param("id") Integer id);
+
+    int updatePersonInfo(Person person);
 }

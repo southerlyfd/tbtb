@@ -45,11 +45,21 @@ public class PersonServiceImpl implements PersonService {
             return page;
         }
         // 计算分页
-        List<Person> dataLst = personDao.findPersonInfoLst(page);
+        List<Person> dataLst = personDao.findPersonInfoLst(page, parameter);
         if (dataLst == null || dataLst.size() == 0) {
             return page;
         }
         page.setList(dataLst);
         return page;
+    }
+
+    @Override
+    public int deletePersonInfo(Integer id) {
+        return personDao.deletePersonInfo(id);
+    }
+
+    @Override
+    public int updatePersonInfo(Person person) {
+        return personDao.updatePersonInfo(person);
     }
 }
