@@ -3,8 +3,11 @@ package com.tbtaobao.cloud.fiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import com.tbtaobao.cloud.redis.BaseRedisService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -25,6 +28,9 @@ public class AccessFilter extends ZuulFilter {
 
     //无权限时的提示语
     private static final String INVALID_TOKEN = "invalid token";
+
+    @Autowired
+    private BaseRedisService baseRedisService;
 
     /**
      * 配置过滤类型，有四种不同生命周期的过滤器类型
@@ -86,9 +92,20 @@ public class AccessFilter extends ZuulFilter {
             } catch (IOException e) {
             }
         } else {
-            logger.info("OK");
-            //将头信息传递下去
-            context.addZuulRequestHeader("accessToken", token);
+            String redisToken = baseRedisService.get(token);
+            if (StringUtils.isEmpty(redisToken)) {
+                logger.warn("redisToken is invalid");
+                context.setSendZuulResponse(false);
+                context.setResponseStatusCode(401);
+                try {
+                    context.getResponse().getWriter().write("redisToken is invalid");
+                } catch (IOException e) {
+                }
+            } else {
+                logger.info("OK");
+                //将头信息传递下去
+                context.addZuulRequestHeader("accessToken", token);
+            }
         }
         return null;
     }
