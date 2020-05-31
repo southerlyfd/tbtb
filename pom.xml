@@ -14,6 +14,7 @@
         <module>tbtb-zuul-server</module>
         <module>tbtb-common</module>
         <module>tbtb-auth</module>
+        <module>tbtb-dictionary</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->

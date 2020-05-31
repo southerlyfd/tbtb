@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tbtaobao.cloud.dao.Dictionary">
+
+    <resultMap id="dictionaryMap" type="com.tbtaobao.cloud.entity.Dictionary">
+        <result column="DICT_TYP_CD" property="dictTypCd" jdbcType="VARCHAR"/>
+        <result column="DICT_CD" property="dictCd" jdbcType="VARCHAR"/>
+        <result column="DICT_DESC" property="dictDesc" jdbcType="VARCHAR"/>
+        <result column="DICT_SRC" property="dictSrc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 查询字典类型 -->
+    <select id="queryDictionary" parameterType="dictionaryMap" resultMap="dictionaryMap">
+        SELECT DICT_TYP_CD, DICT_CD, DICT_DESC, DICT_SRC FROM TBTB.DICTIONARY
+        <where>
+            <if test="dictTypCd != null and dictTypCd != ''">
+                AND DICT_TYP_CD = #{dictTypCd}
+            </if>
+            <if test="dictCd != null and dictCd != ''">
+                AND DICT_CD = #{dictCd}
+            </if>
+        </where>
+    </select>
+
+    <!-- 新增字典值 -->
+    <insert id="addDictionary" parameterType="java.util.List">
+        INSERT INTO TBTB.DICTIONARY (DICT_TYP_CD, DICT_CD, DICT_DESC, DICT_SRC)
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.dictTypCd, jdbcType=VARCHAR},
+            #{item.dictCd, jdbcType=VARCHAR},
+            #{item.dictDesc, jdbcType=VARCHAR},
+            #{item.dictSrc, jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 删除字典值 -->
+    <delete id="delDictionary" parameterType="dictionaryMap">
+        DELETE FROM TBTB.DICTIONARY
+        <where>
+            <if test="dictTypCd != null and dictTypCd != ''">
+                AND DICT_TYP_CD = #{dictTypCd}
+            </if>
+            <if test="dictTypCdList != null and dictTypCdList.length!=0">
+                AND DICT_TYP_CD IN
+                <foreach collection="dictTypCdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+</mapper>
