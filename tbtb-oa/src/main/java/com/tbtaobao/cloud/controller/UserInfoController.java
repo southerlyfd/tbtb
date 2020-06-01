@@ -118,7 +118,7 @@ public class UserInfoController {
     /**
      * 根据token查询职员信息
      *
-     * @param accessToken
+     * @param
      * @return
      */
     @RequestMapping("/findPersonInfoByToken")
