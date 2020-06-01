@@ -122,19 +122,12 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/findPersonInfoByToken")
-    public CommonResult<Person> findPersonInfoByToken(@RequestHeader String accessToken){
-        CommonResult<Person> result = new CommonResult<Person>();
-
-        UserInfo userInfo = userInfoService.findUserInfoByAccessToken(accessToken);
-        if (userInfo == null) {
-            result.setCode(404);
-            result.setMessage("token 已失效！");
-            return  result;
-        }
-        Person data = personService.getPersonById(userInfo.getUserId());
+    public CommonResult<UserInfo> findPersonInfoByToken(UserInfo userInfo){
+        CommonResult<UserInfo> result = new CommonResult<UserInfo>();
+        UserInfo data = userInfoService.findUserInfoByAccessToken(userInfo.getAccessToken());
         if (data == null) {
             result.setCode(404);
-            result.setMessage("没有该成员信息");
+            result.setMessage("token 已失效！");
             return  result;
         }
         result.setCode(200);

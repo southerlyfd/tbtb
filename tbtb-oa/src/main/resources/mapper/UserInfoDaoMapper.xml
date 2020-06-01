@@ -25,7 +25,7 @@
 
     <select id="findUserInfoToken" parameterType="String" resultMap="BaseResultMap">
         SELECT
-            ui.*
+            ui.user_id, ui.account_num
         FROM
             user_info ui
         WHERE
