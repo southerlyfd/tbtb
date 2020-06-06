@@ -70,7 +70,7 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/createPersonInfo")
-    public CommonResult<Map> createPersonInfo(Person person){
+    public CommonResult<Map> createPersonInfo(FindPersonInfo person){
         CommonResult<Map> result = new CommonResult<Map>();
         if (person.getName() == null || "".equals(person.getName())) {
             result.setCode(404);

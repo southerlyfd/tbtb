@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface PersonService {
 
-    public int create(Person person);
+    public int create(FindPersonInfo person);
 
     public Person getPersonById(@Param("id") Integer id);
 

@@ -56,15 +56,68 @@ public class WageController {
         return result;
     }
 
-    // 更新员工工资信息接口
+    /**
+     * 更新员工工资信息接口
+     * @param wage
+     * @return
+     */
+    @RequestMapping("/updateWageInfo")
+    public CommonResult<Map> updateWageInfo(Wage wage){
+        CommonResult<Map> result = new CommonResult<Map>();
+        if (wage == null) {
+            result.setCode(404);
+            result.setMessage("更新信息为空");
+            return result;
+        }
+        if (wage.getWageId() == null || wage.getWageId() < 1) {
+            result.setCode(404);
+            result.setMessage("wageId字段不合法");
+            return result;
+        }
+        Integer data = wageService.update(wage);
+        if (data == null || data <= 0) {
+            result.setCode(404);
+            result.setMessage("更新信息失败");
+            return result;
+        }
+        result.setCode(200);
+        result.setMessage("更新成功");
+        return result;
+    }
 
 
+    /**
+     * 删除员工工资信息接口
+     * @param wageId
+     * @return
+     */
+    @RequestMapping("/deleteWageInfo")
+    public CommonResult<Map> deleteWageInfo (Integer wageId){
+        CommonResult<Map> result = new CommonResult<Map>();
+        if (wageId == null || wageId < 1) {
+            result.setCode(404);
+            result.setMessage("wageId字段不合法");
+            return result;
+        }
 
-    // 删除员工工资信息接口
-
-
+        Integer data = wageService.delete(wageId);
+        if (data == null || data <= 0) {
+            result.setCode(404);
+            result.setMessage("删除工资信息失败");
+            return result;
+        }
+        result.setCode(200);
+        result.setMessage("删除成功");
+        return result;
+    }
 
     // 分页查询员工工资信息接口
+    public CommonResult<Map> findWageInfoLst(){
+        CommonResult<Map> result = new CommonResult<Map>();
+
+
+        return result;
+    }
 
 
 

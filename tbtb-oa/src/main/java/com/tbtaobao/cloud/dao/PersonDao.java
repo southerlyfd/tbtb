@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface PersonDao {
 
-    public int create(Person person);
+    public int create(@Param("parameter")FindPersonInfo parameter);
 
     public Person getPersonById(@Param("id") Integer id);
 

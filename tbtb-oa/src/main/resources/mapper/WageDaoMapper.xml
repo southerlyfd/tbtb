@@ -3,6 +3,19 @@
 
 <mapper namespace="com.tbtaobao.cloud.dao.WageDao">
 
+    <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.entities.Wage">
+        <id column="wage_id" property="wageId" jdbcType="BIGINT"/>
+        <result column="employee_id" property="employeeID" jdbcType="BIGINT" />
+        <result column="base_pay" property="basePay" jdbcType="DECIMAL" />
+        <result column="baseprize" property="baseprize" jdbcType="DECIMAL" />
+        <result column="benifitprize" property="benifitprize" jdbcType="DECIMAL" />
+        <result column="insurance" property="insurance" jdbcType="DECIMAL" />
+        <result column="medicare" property="medicare" jdbcType="DECIMAL" />
+        <result column="deprivepay" property="deprivepay" jdbcType="DECIMAL" />
+        <result column="depriveprize" property="depriveprize" jdbcType="DECIMAL" />
+        <result column="depriveattend" property="depriveattend" jdbcType="DECIMAL" />
+    </resultMap>
+
     <insert id="create" useGeneratedKeys="true" keyProperty="wageId">
         insert into wage
             <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -65,4 +78,53 @@
             </trim>
     </insert>
 
+    <update id="update">
+        update wage
+        <trim prefix="set" suffixOverrides=",">
+            <if test="basePay != null">base_pay = #{basePay}</if>
+            <if test="baseprize != null">baseprize = #{baseprize}</if>
+            <if test="benifitprize != null">benifitprize = #{benifitprize}</if>
+            <if test="insurance != null">insurance = #{insurance}</if>
+            <if test="medicare != null">medicare = #{medicare}</if>
+            <if test="deprivepay != null">deprivepay = #{deprivepay}</if>
+            <if test="depriveprize != null">depriveprize = #{depriveprize}</if>
+            <if test="depriveattend != null">depriveattend = #{depriveattend}</if>
+        </trim>
+        where wage_id = #{wageId}
+    </update>
+
+    <delete id="delete">
+        delete from wage where wage_id = #{wageId}
+    </delete>
+
+    <select id="findWageInfoLstCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT( 1 )
+        FROM
+            wage AS w
+            LEFT JOIN person AS p ON p.EmployeeID = w.employee_id
+        WHERE 1=1
+            <if test="parameter.name != null">
+                AND p.`Name` = #{parameter.name}
+            </if>
+            <if test="parameter.employeeID != null">
+                AND p.EmployeeID = #{parameter.employeeID}
+            </if>
+    </select>
+
+    <select id="findWageInfoLst" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+        wage AS w
+        LEFT JOIN person AS p ON p.EmployeeID = w.employee_id
+        WHERE 1=1
+        <if test="parameter.name != null">
+            AND p.`Name` = #{parameter.name}
+        </if>
+        <if test="parameter.employeeID != null">
+            AND p.EmployeeID = #{parameter.employeeID}
+        </if>
+        LIMIT #{page.startIndex},#{page.onePageCount}
+    </select>
 </mapper>

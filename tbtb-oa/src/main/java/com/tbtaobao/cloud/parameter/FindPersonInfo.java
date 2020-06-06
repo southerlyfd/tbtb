@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author ：jhb
  * @date ：2020-05-25 22:10
@@ -25,4 +27,28 @@ public class FindPersonInfo {
 
     // 职工姓名
     private     String      name;
+
+    private     String      sex;
+    private     Long        date;
+    private     Date        dates;
+    private     String      city;
+    private     String      nation;
+    private     String      polity;
+    private     String      culture;
+    private     String      marriage;
+    private     String      graduate;
+    private     String      spec;
+    private     String      speci;
+    private     String      wtype;
+    private     String      duty;
+    private     String      depart;
+    private     String      idcard;
+    private     String      address;
+    private     String      postcode;
+    private     String      homePhone;
+    private     String      mobile;
+    private     String      email;
+    private     String      resume;
+    private     String      photo;
+
 }

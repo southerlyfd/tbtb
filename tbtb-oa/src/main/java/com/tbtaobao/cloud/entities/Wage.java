@@ -16,13 +16,14 @@ import java.math.BigDecimal;
 public class Wage {
 
     private     Integer             wageId;
-    private     Integer             employeeID;
-    private     BigDecimal          basePay;
-    private     BigDecimal          baseprize;
-    private     BigDecimal          benifitprize;
-    private     BigDecimal          insurance;
-    private     BigDecimal          medicare;
-    private     BigDecimal          deprivepay;
-    private     BigDecimal          depriveprize;
-    private     BigDecimal          depriveattend;
+    private     Integer             employeeID; // '职工ID'
+    private     BigDecimal          basePay;    // 基本工资
+    private     BigDecimal          baseprize;  // 基本奖金
+    private     BigDecimal          benifitprize;   // 效益奖金
+    private     BigDecimal          insurance;  // 养老保险
+    private     BigDecimal          medicare;   // 医疗保险
+    private     BigDecimal          deprivepay; // 扣发工资
+    private     BigDecimal          depriveprize;   // 扣发奖金
+    private     BigDecimal          depriveattend;  // 考勤扣发
+
 }

@@ -8,6 +8,7 @@ import com.tbtaobao.cloud.service.PersonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,10 @@ public class PersonServiceImpl implements PersonService {
     private PersonDao personDao;
 
     @Override
-    public int create(Person person) {
+    public int create(FindPersonInfo person) {
+        if (person != null && person.getDate() != null) {
+            person.setDates(new Date(person.getDate()));
+        }
         return personDao.create(person);
     }
 

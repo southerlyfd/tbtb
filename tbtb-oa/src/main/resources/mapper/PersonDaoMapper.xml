@@ -3,142 +3,142 @@
 
 <mapper namespace="com.tbtaobao.cloud.dao.PersonDao">
 
-    <insert id="create" parameterType="Person" useGeneratedKeys="true" keyProperty="employeeID">
+    <insert id="create">
         insert  into person
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="name != null">
+                <if test="parameter.name != null">
                     Name,
                 </if>
-                <if test="sex != null">
+                <if test="parameter.sex != null">
                     Sex,
                 </if>
-                <if test="date != null">
+                <if test="parameter.dates != null">
                     Date,
                 </if>
-                <if test="city != null">
+                <if test="parameter.city != null">
                     City,
                 </if>
-                <if test="nation != null">
+                <if test="parameter.nation != null">
                     Nation,
                 </if>
-                <if test="polity != null">
+                <if test="parameter.polity != null">
                     Polity,
                 </if>
-                <if test="culture != null">
+                <if test="parameter.culture != null">
                     Culture,
                 </if>
-                <if test="marriage != null">
+                <if test="parameter.marriage != null">
                     Marriage,
                 </if>
-                <if test="graduate != null">
+                <if test="parameter.graduate != null">
                     Graduate,
                 </if>
-                <if test="spec != null">
+                <if test="parameter.spec != null">
                     Spec,
                 </if>
-                <if test="speci != null">
+                <if test="parameter.speci != null">
                     Speci,
                 </if>
-                <if test="wtype != null">
+                <if test="parameter.wtype != null">
                     Wtype,
                 </if>
-                <if test="duty != null">
+                <if test="parameter.duty != null">
                     Duty,
                 </if>
-                <if test="depart != null">
+                <if test="parameter.depart != null">
                     Depart,
                 </if>
-                <if test="idcard != null">
+                <if test="parameter.idcard != null">
                     IDcard,
                 </if>
-                <if test="address != null">
+                <if test="parameter.address != null">
                     Address,
                 </if>
-                <if test="postcode != null">
+                <if test="parameter.postcode != null">
                     Postcode,
                 </if>
-                <if test="homePhone != null">
+                <if test="parameter.homePhone != null">
                     HomePhone,
                 </if>
-                <if test="mobile != null">
+                <if test="parameter.mobile != null">
                     Mobile,
                 </if>
-                <if test="email != null">
+                <if test="parameter.email != null">
                     Email,
                 </if>
-                <if test="resume != null">
+                <if test="parameter.resume != null">
                     Resume,
                 </if>
-                <if test="photo != null">
+                <if test="parameter.photo != null">
                     Photo,
                 </if>
             </trim>
             <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-                <if test="name != null">
-                    #{name},
+                <if test="parameter.name != null">
+                    #{parameter.name},
                 </if>
-                <if test="sex != null">
-                    #{sex},
+                <if test="parameter.sex != null">
+                    #{parameter.sex},
                 </if>
-                <if test="date != null">
-                    #{date},
+                <if test="parameter.dates != null">
+                    #{parameter.dates},
                 </if>
-                <if test="city != null">
-                    #{city},
+                <if test="parameter.city != null">
+                    #{parameter.city},
                 </if>
-                <if test="nation != null">
-                    #{nation},
+                <if test="parameter.nation != null">
+                    #{parameter.nation},
                 </if>
-                <if test="polity != null">
-                    #{polity},
+                <if test="parameter.polity != null">
+                    #{parameter.polity},
                 </if>
-                <if test="culture != null">
-                    #{culture},
+                <if test="parameter.culture != null">
+                    #{parameter.culture},
                 </if>
-                <if test="marriage != null">
-                    #{marriage},
+                <if test="parameter.marriage != null">
+                    #{parameter.marriage},
                 </if>
-                <if test="graduate != null">
-                    #{graduate},
+                <if test="parameter.graduate != null">
+                    #{parameter.graduate},
                 </if>
-                <if test="spec != null">
-                    #{spec},
+                <if test="parameter.spec != null">
+                    #{parameter.spec},
                 </if>
-                <if test="speci != null">
-                    #{speci},
+                <if test="parameter.speci != null">
+                    #{parameter.speci},
                 </if>
-                <if test="wtype != null">
-                    #{wtype},
+                <if test="parameter.wtype != null">
+                    #{parameter.wtype},
                 </if>
-                <if test="duty != null">
-                    #{duty},
+                <if test="parameter.duty != null">
+                    #{parameter.duty},
                 </if>
-                <if test="depart != null">
-                    #{depart},
+                <if test="parameter.depart != null">
+                    #{parameter.depart},
                 </if>
-                <if test="idcard != null">
-                    #{idcard},
+                <if test="parameter.idcard != null">
+                    #{parameter.idcard},
                 </if>
-                <if test="address != null">
-                    #{address},
+                <if test="parameter.address != null">
+                    #{parameter.address},
                 </if>
-                <if test="postcode != null">
-                    #{postcode},
+                <if test="parameter.postcode != null">
+                    #{parameter.postcode},
                 </if>
-                <if test="homePhone != null">
-                    #{homePhone},
+                <if test="parameter.homePhone != null">
+                    #{parameter.homePhone},
                 </if>
-                <if test="mobile != null">
-                    #{mobile},
+                <if test="parameter.mobile != null">
+                    #{parameter.mobile},
                 </if>
-                <if test="email != null">
-                    #{email},
+                <if test="parameter.email != null">
+                    #{parameter.email},
                 </if>
-                <if test="resume != null">
-                    #{resume},
+                <if test="parameter.resume != null">
+                    #{parameter.resume},
                 </if>
-                <if test="photo != null">
-                    #{photo},
+                <if test="parameter.photo != null">
+                    #{parameter.photo},
                 </if>
             </trim>
     </insert>

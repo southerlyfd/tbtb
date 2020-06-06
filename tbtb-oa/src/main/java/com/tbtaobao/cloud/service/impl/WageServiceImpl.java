@@ -1,5 +1,6 @@
 package com.tbtaobao.cloud.service.impl;
 
+import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.dao.WageDao;
 import com.tbtaobao.cloud.entities.Wage;
 import com.tbtaobao.cloud.service.WageService;
@@ -20,5 +21,20 @@ public class WageServiceImpl implements WageService {
     @Override
     public int create(Wage wage) {
         return wageDao.create(wage);
+    }
+
+    @Override
+    public int update(Wage wage) {
+        return wageDao.update(wage);
+    }
+
+    @Override
+    public int delete(Integer wageId) {
+        return wageDao.delete(wageId);
+    }
+
+    @Override
+    public Page<Wage> findWageInfoLst(Wage parameter) {
+        return null;
     }
 }
