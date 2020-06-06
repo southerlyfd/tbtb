@@ -2,6 +2,8 @@ package com.tbtaobao.cloud.dao;
 
 import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.Wage;
+import com.tbtaobao.cloud.parameter.FindMageInfo;
+import com.tbtaobao.cloud.parameter.FindWageInfoData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +22,7 @@ public interface WageDao {
 
     int delete(@Param("wageId") Integer wageId);
 
-    int findWageInfoLstCount(@Param("parameter") Wage wage);
+    int findWageInfoLstCount(@Param("parameter") FindMageInfo parameter);
 
-    List<Wage> findWageInfoLst(@Param("page") Page page, @Param("parameter") Wage wage);
+    List<FindWageInfoData> findWageInfoLst(@Param("page") Page page, @Param("parameter") FindMageInfo parameter);
 }

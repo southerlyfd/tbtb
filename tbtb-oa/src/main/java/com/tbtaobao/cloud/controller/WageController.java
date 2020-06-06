@@ -1,14 +1,17 @@
 package com.tbtaobao.cloud.controller;
 
+import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.entities.Wage;
+import com.tbtaobao.cloud.parameter.FindMageInfo;
 import com.tbtaobao.cloud.service.WageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.awt.print.Paper;
 import java.util.Map;
 
 /**
@@ -111,14 +114,19 @@ public class WageController {
         return result;
     }
 
-    // 分页查询员工工资信息接口
-    public CommonResult<Map> findWageInfoLst(){
-        CommonResult<Map> result = new CommonResult<Map>();
-
-
+    /**
+     * 分页查询员工工资信息接口
+     * @param mageInfo
+     * @return
+     */
+    @RequestMapping("/findWageInfoLst")
+    public CommonResult<Page> findWageInfoLst(FindMageInfo mageInfo){
+        CommonResult<Page> result = new CommonResult<Page>();
+        Page data = wageService.findWageInfoLst(mageInfo);
+        result.setData(data);
+        result.setCode(200);
+        result.setMessage("查询成功");
         return result;
     }
-
-
 
 }

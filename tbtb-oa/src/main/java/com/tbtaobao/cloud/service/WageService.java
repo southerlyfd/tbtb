@@ -2,6 +2,8 @@ package com.tbtaobao.cloud.service;
 
 import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.Wage;
+import com.tbtaobao.cloud.parameter.FindMageInfo;
+import com.tbtaobao.cloud.parameter.FindWageInfoData;
 
 /**
  * @author ：jhb
@@ -15,5 +17,5 @@ public interface WageService {
 
     int delete(Integer wageId);
 
-    Page<Wage> findWageInfoLst(Wage parameter);
+    Page<FindWageInfoData> findWageInfoLst(FindMageInfo mageInfo);
 }

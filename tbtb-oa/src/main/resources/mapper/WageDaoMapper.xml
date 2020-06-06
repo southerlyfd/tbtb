@@ -3,7 +3,7 @@
 
 <mapper namespace="com.tbtaobao.cloud.dao.WageDao">
 
-    <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.entities.Wage">
+    <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.parameter.FindWageInfoData">
         <id column="wage_id" property="wageId" jdbcType="BIGINT"/>
         <result column="employee_id" property="employeeID" jdbcType="BIGINT" />
         <result column="base_pay" property="basePay" jdbcType="DECIMAL" />
@@ -14,6 +14,7 @@
         <result column="deprivepay" property="deprivepay" jdbcType="DECIMAL" />
         <result column="depriveprize" property="depriveprize" jdbcType="DECIMAL" />
         <result column="depriveattend" property="depriveattend" jdbcType="DECIMAL" />
+        <result column="Name" property="name" jdbcType="VARCHAR" />
     </resultMap>
 
     <insert id="create" useGeneratedKeys="true" keyProperty="wageId">
@@ -105,7 +106,7 @@
             LEFT JOIN person AS p ON p.EmployeeID = w.employee_id
         WHERE 1=1
             <if test="parameter.name != null">
-                AND p.`Name` = #{parameter.name}
+                AND INSTR(p.`Name`, #{parameter.name}) > 0
             </if>
             <if test="parameter.employeeID != null">
                 AND p.EmployeeID = #{parameter.employeeID}
@@ -114,13 +115,14 @@
 
     <select id="findWageInfoLst" resultMap="BaseResultMap">
         SELECT
-            *
+            w.*,
+            p.Name
         FROM
         wage AS w
         LEFT JOIN person AS p ON p.EmployeeID = w.employee_id
         WHERE 1=1
         <if test="parameter.name != null">
-            AND p.`Name` = #{parameter.name}
+            AND INSTR(p.`Name`, #{parameter.name}) > 0
         </if>
         <if test="parameter.employeeID != null">
             AND p.EmployeeID = #{parameter.employeeID}

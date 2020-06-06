@@ -153,7 +153,7 @@ public class UserInfoController {
 
     /**
      * 删除职员信息
-     * @param employeeId
+     * @param employeeID
      * @return
      */
     @RequestMapping("/deletePersonInfo")
