@@ -122,7 +122,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public int updatePersonInfo(Person person) {
+    public int updatePersonInfo(FindPersonInfo person) {
+        if (person != null && person.getDate() != null) {
+            person.setDates(new Date(person.getDate()));
+        }
         return personDao.updatePersonInfo(person);
     }
 }

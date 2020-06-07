@@ -179,7 +179,7 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/updatePersonInfo")
-    public CommonResult<Map> updatePersonInfo(Person person){
+    public CommonResult<Map> updatePersonInfo(FindPersonInfo person){
         CommonResult<Map> result = new CommonResult<Map>();
 
         if (person == null || person.getEmployeeID() == null || person.getEmployeeID() <= 0) {

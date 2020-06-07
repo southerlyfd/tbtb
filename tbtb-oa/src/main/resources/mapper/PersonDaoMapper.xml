@@ -201,7 +201,7 @@
         DELETE FROM person WHERE EmployeeID = #{id}
     </delete>
 
-    <update id="updatePersonInfo" parameterType="Person">
+    <update id="updatePersonInfo">
         UPDATE person
         <set>
             <if test="name != null">
@@ -210,8 +210,8 @@
             <if test="sex != null">
                 Sex = #{sex},
             </if>
-            <if test="date != null">
-                Date = #{date},
+            <if test="dates != null">
+                Date = #{dates},
             </if>
             <if test="city != null">
                 City = #{city},

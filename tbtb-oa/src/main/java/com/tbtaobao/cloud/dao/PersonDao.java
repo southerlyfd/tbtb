@@ -26,5 +26,5 @@ public interface PersonDao {
 
     int deletePersonInfo(@Param("id") Integer id);
 
-    int updatePersonInfo(Person person);
+    int updatePersonInfo(FindPersonInfo person);
 }
