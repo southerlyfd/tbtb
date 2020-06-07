@@ -3,6 +3,7 @@ package com.tbtaobao.cloud.dao;
 import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.parameter.FindPersonInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfoData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -5,10 +5,10 @@ import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.entities.UserInfo;
 import com.tbtaobao.cloud.parameter.FindPersonInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfoData;
 import com.tbtaobao.cloud.service.PersonService;
 import com.tbtaobao.cloud.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -95,15 +95,15 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping("/findPersonOne")
-    public CommonResult<Person> findPersonInfo(Person person){
-        CommonResult<Person> result = new CommonResult<Person>();
+    public CommonResult<FindPersonInfoData> findPersonInfo(Person person){
+        CommonResult<FindPersonInfoData> result = new CommonResult<FindPersonInfoData>();
 
         if (person.getEmployeeID() == null || person.getEmployeeID() < 0) {
             result.setCode(404);
             result.setMessage("employeeID参数错误");
             return  result;
         }
-        Person data = personService.getPersonById(person.getEmployeeID());
+        FindPersonInfoData data = personService.getPersonById(person.getEmployeeID());
         if (data == null) {
             result.setCode(404);
             result.setMessage("没有该成员信息");

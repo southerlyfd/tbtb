@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tbtaobao.cloud.dao.AttendDao">
+
+    <resultMap id="BaseResultMap" type="com.tbtaobao.cloud.parameter.FindAttendInfoData">
+        <id column="attend_id" property="attendId" jdbcType="BIGINT" />
+        <result column="employee_id" property="employeeID" jdbcType="BIGINT" />
+        <result column="late" property="late" jdbcType="BIGINT" />
+        <result column="leaceearly" property="leaceearly" jdbcType="BIGINT" />
+        <result column="jobwound" property="jobwound" jdbcType="BIGINT" />
+        <result column="s_leave" property="sleave" jdbcType="BIGINT" />
+        <result column="pa_leave" property="paLeave" jdbcType="BIGINT" />
+        <result column="Name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="create">
+        insert into attend
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="parameter.employeeID != null">
+                    employee_id,
+                </if>
+                <if test="parameter.late != null">
+                    late,
+                </if>
+                <if test="parameter.leaceearly != null">
+                    leaceearly,
+                </if>
+                <if test="parameter.jobwound != null">
+                    jobwound,
+                </if>
+                <if test="parameter.sleave != null">
+                    s_leave,
+                </if>
+                <if test="parameter.paLeave != null">
+                    pa_leave,
+                </if>
+            </trim>
+            <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+                <if test="parameter.employeeID != null">
+                    #{parameter.employeeID},
+                </if>
+                <if test="parameter.late != null">
+                    #{parameter.late},
+                </if>
+                <if test="parameter.leaceearly != null">
+                    #{parameter.leaceearly},
+                </if>
+                <if test="parameter.jobwound != null">
+                    #{parameter.jobwound},
+                </if>
+                <if test="parameter.sleave != null">
+                    #{parameter.sleave},
+                </if>
+                <if test="parameter.paLeave != null">
+                    #{parameter.paLeave},
+                </if>
+            </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE from attend where attend_id = #{attendId}
+    </delete>
+
+    <select id="findAttendInfoLstCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        attend AS a
+        LEFT JOIN person AS p ON p.EmployeeID = a.employee_id
+        WHERE 1=1
+        <if test="parameter.name != null">
+            AND INSTR( p.`Name`, #{parameter.name}) > 0
+        </if>
+        <if test="parameter.employeeID != null">
+            AND p.EmployeeID = #{parameter.employeeID}
+        </if>
+    </select>
+
+    <select id="findAttendInfoLst" resultMap="BaseResultMap">
+        SELECT
+        a.*,
+        p.Name
+        FROM
+        attend AS a
+        LEFT JOIN person AS p ON p.EmployeeID = a.employee_id
+        WHERE 1=1
+        <if test="parameter.name != null">
+            AND INSTR( p.`Name`, #{parameter.name}) > 0
+        </if>
+        <if test="parameter.employeeID != null">
+            AND p.EmployeeID = #{parameter.employeeID}
+        </if>
+        LIMIT #{page.startIndex},#{page.onePageCount}
+    </select>
+
+</mapper>

@@ -3,6 +3,7 @@ package com.tbtaobao.cloud.service;
 import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.parameter.FindPersonInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfoData;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -13,9 +14,9 @@ public interface PersonService {
 
     public int create(FindPersonInfo person);
 
-    public Person getPersonById(@Param("id") Integer id);
+    public FindPersonInfoData getPersonById(@Param("id") Integer id);
 
-    Page<Person> findPersonInfoLst(FindPersonInfo parameter);
+    Page<FindPersonInfoData> findPersonInfoLst(FindPersonInfo parameter);
 
     int deletePersonInfo(@Param("id") Integer id);
 
