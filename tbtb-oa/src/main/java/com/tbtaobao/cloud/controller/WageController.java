@@ -5,7 +5,9 @@ import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.entities.Wage;
 import com.tbtaobao.cloud.parameter.FindMageInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfoData;
 import com.tbtaobao.cloud.parameter.FindWageInfoData;
+import com.tbtaobao.cloud.service.PersonService;
 import com.tbtaobao.cloud.service.WageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,9 @@ public class WageController {
     @Resource
     private WageService wageService;
 
+    @Resource
+    private PersonService personService;
+
 
     /**
      * 新增工资信息
@@ -47,6 +52,12 @@ public class WageController {
         if (wage.getEmployeeID() == null || wage.getEmployeeID() <= 0) {
             result.setCode(404);
             result.setMessage("用户信息不能为空");
+            return result;
+        }
+        FindPersonInfoData person = personService.getPersonById(wage.getEmployeeID());
+        if (person == null || person.getEmployeeID() == null) {
+            result.setCode(404);
+            result.setMessage("不存在该职员ID的职员信息，请核实");
             return result;
         }
         Integer data = wageService.create(wage);
