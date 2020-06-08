@@ -82,14 +82,14 @@
     <update id="update">
         update wage
         <trim prefix="set" suffixOverrides=",">
-            <if test="basePay != null">base_pay = #{basePay}</if>
-            <if test="baseprize != null">baseprize = #{baseprize}</if>
-            <if test="benifitprize != null">benifitprize = #{benifitprize}</if>
-            <if test="insurance != null">insurance = #{insurance}</if>
-            <if test="medicare != null">medicare = #{medicare}</if>
-            <if test="deprivepay != null">deprivepay = #{deprivepay}</if>
-            <if test="depriveprize != null">depriveprize = #{depriveprize}</if>
-            <if test="depriveattend != null">depriveattend = #{depriveattend}</if>
+            <if test="basePay != null">base_pay = #{basePay},</if>
+            <if test="baseprize != null">baseprize = #{baseprize},</if>
+            <if test="benifitprize != null">benifitprize = #{benifitprize},</if>
+            <if test="insurance != null">insurance = #{insurance},</if>
+            <if test="medicare != null">medicare = #{medicare},</if>
+            <if test="deprivepay != null">deprivepay = #{deprivepay},</if>
+            <if test="depriveprize != null">depriveprize = #{depriveprize},</if>
+            <if test="depriveattend != null">depriveattend = #{depriveattend},</if>
         </trim>
         where wage_id = #{wageId}
     </update>
