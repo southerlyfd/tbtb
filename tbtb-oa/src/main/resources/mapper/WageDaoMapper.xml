@@ -129,4 +129,18 @@
         </if>
         LIMIT #{page.startIndex},#{page.onePageCount}
     </select>
+
+    <select id="findWageOne" resultMap="BaseResultMap">
+        SELECT
+            w.*,
+            p.Name
+        FROM
+        wage AS w
+        LEFT JOIN person AS p ON p.EmployeeID = w.employee_id
+        WHERE w.wage_id = #{wageId}
+    </select>
+
+    <select id="findWageIsThere" resultType="java.lang.Integer">
+        select count(1) from wage as w where w.employee_id = #{employeeID}
+    </select>
 </mapper>

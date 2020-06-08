@@ -18,4 +18,7 @@ public interface WageService {
     int delete(Integer wageId);
 
     Page<FindWageInfoData> findWageInfoLst(FindMageInfo mageInfo);
+
+    FindWageInfoData findWageOne(Integer wageId);
+
 }

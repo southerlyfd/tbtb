@@ -24,6 +24,11 @@ public class WageServiceImpl implements WageService {
 
     @Override
     public int create(Wage wage) {
+        // 判断是否存在工资信息
+        int isWhereAre = wageDao.findWageIsThere(wage);
+        if (isWhereAre > 0) {
+            return 1;
+        }
         return wageDao.create(wage);
     }
 
@@ -59,5 +64,10 @@ public class WageServiceImpl implements WageService {
         }
         page.setList(dataLst);
         return page;
+    }
+
+    @Override
+    public FindWageInfoData findWageOne(Integer wageId) {
+        return wageDao.findWageOne(wageId);
     }
 }

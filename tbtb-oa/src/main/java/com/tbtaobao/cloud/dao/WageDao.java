@@ -25,4 +25,8 @@ public interface WageDao {
     int findWageInfoLstCount(@Param("parameter") FindMageInfo parameter);
 
     List<FindWageInfoData> findWageInfoLst(@Param("page") Page page, @Param("parameter") FindMageInfo parameter);
+
+    FindWageInfoData findWageOne(@Param("wageId") Integer wageId);
+
+    int findWageIsThere(Wage wage);
 }

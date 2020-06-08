@@ -5,6 +5,7 @@ import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.entities.Person;
 import com.tbtaobao.cloud.entities.Wage;
 import com.tbtaobao.cloud.parameter.FindMageInfo;
+import com.tbtaobao.cloud.parameter.FindWageInfoData;
 import com.tbtaobao.cloud.service.WageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -123,6 +124,32 @@ public class WageController {
     public CommonResult<Page> findWageInfoLst(FindMageInfo mageInfo){
         CommonResult<Page> result = new CommonResult<Page>();
         Page data = wageService.findWageInfoLst(mageInfo);
+        result.setData(data);
+        result.setCode(200);
+        result.setMessage("查询成功");
+        return result;
+    }
+
+    /**
+     * 查询工资详情
+     *
+     * @param wageId
+     * @return
+     */
+    @RequestMapping("/findWageOne")
+    public CommonResult<FindWageInfoData> findWageOne(Integer wageId){
+        CommonResult<FindWageInfoData> result = new CommonResult<FindWageInfoData>();
+        if (wageId == null || wageId <= 0) {
+            result.setCode(404);
+            result.setMessage("wageId参数不合法");
+            return result;
+        }
+        FindWageInfoData data = wageService.findWageOne(wageId);
+        if (data == null) {
+            result.setCode(404);
+            result.setMessage("员工工资信息不存在");
+            return result;
+        }
         result.setData(data);
         result.setCode(200);
         result.setMessage("查询成功");
