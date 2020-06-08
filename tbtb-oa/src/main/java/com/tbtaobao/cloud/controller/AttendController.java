@@ -3,7 +3,9 @@ package com.tbtaobao.cloud.controller;
 import com.tbtaobao.cloud.basic.Page;
 import com.tbtaobao.cloud.entities.CommonResult;
 import com.tbtaobao.cloud.parameter.FindAttendInfo;
+import com.tbtaobao.cloud.parameter.FindPersonInfoData;
 import com.tbtaobao.cloud.service.AttendService;
+import com.tbtaobao.cloud.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,9 @@ public class AttendController {
     @Resource
     private AttendService attendService;
 
+    @Resource
+    private PersonService personService;
+
 
     /**
      * 增加考勤记录
@@ -40,6 +45,12 @@ public class AttendController {
         if (attendInfo.getEmployeeID() == null || attendInfo.getEmployeeID() <= 0) {
             result.setCode(404);
             result.setMessage("用户信息不能为空");
+            return result;
+        }
+        FindPersonInfoData person = personService.getPersonById(attendInfo.getEmployeeID());
+        if (person == null || person.getEmployeeID() == null) {
+            result.setCode(404);
+            result.setMessage("不存在该职员ID的职员信息，请核实");
             return result;
         }
         Integer data = attendService.create(attendInfo);
