@@ -181,7 +181,7 @@
             and EmployeeID = #{parameter.employeeID}
         </if>
         <if test="parameter.name != null and parameter.name != '' ">
-            and Name = #{parameter.name}
+            and INSTR(Name, #{parameter.name}) > 0
         </if>
     </select>
 
@@ -192,7 +192,7 @@
             and EmployeeID = #{parameter.employeeID}
         </if>
         <if test="parameter.name != null and parameter.name != '' ">
-            and Name = #{parameter.name}
+            and INSTR(Name, #{parameter.name}) > 0
         </if>
          LIMIT #{page.startIndex},#{page.onePageCount}
     </select>
