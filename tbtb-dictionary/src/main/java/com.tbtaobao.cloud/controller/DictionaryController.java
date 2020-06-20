@@ -1,6 +1,6 @@
 package com.tbtaobao.cloud.controller;
 
-import com.tbtaobao.cloud.entity.Dictionary;
+import com.tbtaobao.cloud.entity.DictionaryInfo;
 import com.tbtaobao.cloud.result.ServiceResult;
 import com.tbtaobao.cloud.service.DictionaryService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,34 +25,45 @@ public class DictionaryController {
 
     /**
      * 查询字典
-     * @param dictionary
+     * @param dictionaryInfo
      * @return
      */
     @RequestMapping("/queryDictionary")
-    public ServiceResult queryDictionary(Dictionary dictionary) {
-        List<Dictionary> dictionaryList = dictionaryService.queryDictionary(dictionary);
+    public ServiceResult queryDictionary(DictionaryInfo dictionaryInfo) {
+        List<DictionaryInfo> dictionaryList = dictionaryService.queryDictionary(dictionaryInfo);
         return new ServiceResult(dictionaryList);
     }
 
     /**
-     * 新增字典值
-     * @param dictionaryList
+     * 新增字典
+     * @param dictionaryInfo
      * @return
      */
     @RequestMapping("/addDictionary")
-    public ServiceResult addDictionary(List<Dictionary> dictionaryList) {
-        dictionaryService.addDictionary(dictionaryList);
+    public ServiceResult addDictionary(DictionaryInfo dictionaryInfo) {
+        dictionaryService.addDictionary(dictionaryInfo);
         return new ServiceResult();
     }
 
     /**
-     * 删除字典值
-     * @param dictionary
+     * 修改字典
+     * @param dictionaryInfo
+     * @return
+     */
+    @RequestMapping("/updateDictionary")
+    public ServiceResult updateDictionary(DictionaryInfo dictionaryInfo) {
+        dictionaryService.addDictionary(dictionaryInfo);
+        return new ServiceResult();
+    }
+
+    /**
+     * 删除字典
+     * @param dictionaryInfo
      * @return
      */
     @RequestMapping("/delDictionary ")
-    public ServiceResult delDictionary(Dictionary dictionary) {
-        dictionaryService.delDictionary(dictionary);
+    public ServiceResult delDictionary(DictionaryInfo dictionaryInfo) {
+        dictionaryService.delDictionary(dictionaryInfo);
         return new ServiceResult();
     }
 }

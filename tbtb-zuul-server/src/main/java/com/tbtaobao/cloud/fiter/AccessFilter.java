@@ -94,13 +94,15 @@ public class AccessFilter extends ZuulFilter {
         } else {
             String redisToken = baseRedisService.get(token);
             if (StringUtils.isEmpty(redisToken)) {
-                logger.warn("redisToken is invalid");
-                context.setSendZuulResponse(false);
-                context.setResponseStatusCode(401);
-                try {
-                    context.getResponse().getWriter().write("redisToken is invalid");
-                } catch (IOException e) {
-                }
+//                logger.warn("redisToken is invalid");
+//                context.setSendZuulResponse(false);
+//                context.setResponseStatusCode(401);
+//                try {
+//                    context.getResponse().getWriter().write("redisToken is invalid");
+//                } catch (IOException e) {
+//                }
+                //将头信息传递下去
+                context.addZuulRequestHeader("accessToken", token);
             } else {
                 logger.info("OK");
                 //将头信息传递下去

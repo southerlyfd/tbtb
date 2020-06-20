@@ -1,6 +1,6 @@
 package com.tbtaobao.cloud.service;
 
-import com.tbtaobao.cloud.entity.Dictionary;
+import com.tbtaobao.cloud.entity.DictionaryInfo;
 
 import java.util.List;
 
@@ -12,17 +12,22 @@ import java.util.List;
 public interface DictionaryService {
 
     /**
-     * 查询字典类型
+     * 查询字典
      */
-    List<Dictionary> queryDictionary(Dictionary dictionary);
+    List<DictionaryInfo> queryDictionary(DictionaryInfo dictionaryInfo);
 
     /**
-     * 新增字典值
+     * 新增字典
      */
-    void addDictionary(List<Dictionary> dictionaryList);
+    void addDictionary(DictionaryInfo dictionaryInfo);
 
     /**
-     * 删除字典值
+     * 修改字典
      */
-    void delDictionary(Dictionary dictionary);
+    void updateDictionary(DictionaryInfo dictionaryInfo);
+
+    /**
+     * 删除字典
+     */
+    void delDictionary(DictionaryInfo dictionaryInfo);
 }

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tbtaobao.cloud.dao.Dictionary">
+<mapper namespace="com.tbtaobao.cloud.dao.DictionaryDao">
 
-    <resultMap id="dictionaryMap" type="com.tbtaobao.cloud.entity.Dictionary">
+    <resultMap id="dictionaryInfo" type="com.tbtaobao.cloud.entity.DictionaryInfo">
+        <result column="DICT_TYP_CD" property="dictTypCd" jdbcType="VARCHAR"/>
+        <result column="DICT_TYP_DESC" property="dictTypDesc" jdbcType="VARCHAR"/>
+        <result column="DT_SRC" property="dtSrc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="dictionaryDetail" type="com.tbtaobao.cloud.entity.DictionaryDetail">
         <result column="DICT_TYP_CD" property="dictTypCd" jdbcType="VARCHAR"/>
         <result column="DICT_CD" property="dictCd" jdbcType="VARCHAR"/>
         <result column="DICT_DESC" property="dictDesc" jdbcType="VARCHAR"/>
@@ -11,40 +17,102 @@
     </resultMap>
 
     <!-- 查询字典类型 -->
-    <select id="queryDictionary" parameterType="dictionaryMap" resultMap="dictionaryMap">
-        SELECT DICT_TYP_CD, DICT_CD, DICT_DESC, DICT_SRC FROM TBTB.DICTIONARY
+    <select id="queryDictionaryInfo" parameterType="dictionaryInfo" resultMap="dictionaryInfo">
+        SELECT dict_typ_cd, dict_typ_desc, dt_src FROM tbtb.dictionary_info
         <where>
             <if test="dictTypCd != null and dictTypCd != ''">
-                AND DICT_TYP_CD = #{dictTypCd}
+                AND dict_typ_cd = #{dictTypCd}
             </if>
-            <if test="dictCd != null and dictCd != ''">
-                AND DICT_CD = #{dictCd}
+            <if test="dictTypDesc != null and dictTypDesc != ''">
+                AND dict_typ_desc = #{dictTypDesc}
+            </if>
+            <if test="dtSrc != null and dtSrc != ''">
+                AND dt_src = #{dtSrc}
+            </if>
+            <if test="dictTypCdList != null and dictTypCdList.length!=0">
+                AND dict_typ_cd IN
+                <foreach collection="dictTypCdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
             </if>
         </where>
+        ORDER BY dict_typ_cd
+    </select>
+
+    <!-- 新增字典类型 -->
+    <insert id="addDictionaryInfo" parameterType="dictionaryInfo">
+        INSERT INTO tbtb.dictionary_info (dict_typ_cd, dict_typ_desc, dt_src)
+        VALUES
+            (
+            #{dictTypCd, jdbcType=VARCHAR},
+            #{dictTypDesc, jdbcType=VARCHAR},
+            #{dtSrc, jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <!-- 修改字典类型 -->
+    <update id="updateDictionaryInfo" parameterType="dictionaryInfo">
+        UPDATE tbtb.dictionary_info SET
+            dict_typ_desc = #{dictTypDesc, jdbcType=VARCHAR},
+            dt_src = #{dtSrc, jdbcType=VARCHAR}
+        WHERE dict_typ_cd = #{dictTypCd}
+    </update>
+
+    <!-- 删除字典类型 -->
+    <delete id="delDictionaryInfo" parameterType="dictionaryInfo">
+        DELETE FROM tbtb.dictionary_info
+        <where>
+            <if test="dictTypCd != null and dictTypCd != ''">
+                AND dict_typ_cd = #{dictTypCd}
+            </if>
+            <if test="dictTypCdList != null and dictTypCdList.length!=0">
+                AND dict_typ_cd IN
+                <foreach collection="dictTypCdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+    <!-- 查询字典值 -->
+    <select id="queryDictionaryDetail" parameterType="dictionaryInfo" resultMap="dictionaryInfo">
+        SELECT dict_typ_cd, dict_cd, dict_desc, dict_ordr FROM tbtb.dictionary_detail
+        <where>
+            <if test="dictTypCd != null and dictTypCd != ''">
+                AND dict_typ_cd = #{dictTypCd}
+            </if>
+            <if test="dictTypCdList != null and dictTypCdList.length!=0">
+                AND dict_typ_cd IN
+                <foreach collection="dictTypCdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY dict_typ_cd, dict_ordr
     </select>
 
     <!-- 新增字典值 -->
-    <insert id="addDictionary" parameterType="java.util.List">
-        INSERT INTO TBTB.DICTIONARY (DICT_TYP_CD, DICT_CD, DICT_DESC, DICT_SRC)
+    <insert id="addDictionaryDetail" parameterType="java.util.List">
+        INSERT INTO tbtb.dictionary_detail (dict_typ_cd, dict_cd, dict_desc, dict_ordr)
         <foreach collection="list" item="item" index="index" separator=",">
             (
             #{item.dictTypCd, jdbcType=VARCHAR},
             #{item.dictCd, jdbcType=VARCHAR},
             #{item.dictDesc, jdbcType=VARCHAR},
-            #{item.dictSrc, jdbcType=VARCHAR}
+            #{item.dictOrdr, jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
 
     <!-- 删除字典值 -->
-    <delete id="delDictionary" parameterType="dictionaryMap">
-        DELETE FROM TBTB.DICTIONARY
+    <delete id="delDictionaryDetail" parameterType="dictionaryInfo">
+        DELETE FROM tbtb.dictionary_detail
         <where>
             <if test="dictTypCd != null and dictTypCd != ''">
-                AND DICT_TYP_CD = #{dictTypCd}
+                AND dict_typ_cd = #{dictTypCd}
             </if>
             <if test="dictTypCdList != null and dictTypCdList.length!=0">
-                AND DICT_TYP_CD IN
+                AND dict_typ_cd IN
                 <foreach collection="dictTypCdList" index="index" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
